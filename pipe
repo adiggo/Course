@@ -1,0 +1,4 @@
+UNIX shell uses concurrency along with a communication abstraction known as pipes to provide 
+a powerful form of modularity.
+each command is executed in its own process.
+with all process execute concurrently.

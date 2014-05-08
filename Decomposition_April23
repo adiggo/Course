@@ -1,0 +1,14 @@
+Recursive Decomposition: 
+apply divide and conquer in parallel. 
+
+Data Decomposition:
+data structure with large amounts of similar data need to be processed. 
+
+The key to an effective task decomposition is to ensure taks are sufficiently independent so that manage dependencies only take a small fraction of the program execution time.
+Task decomposition:
+actions are carried out to solve the problem;
+whether these actions are independent
+
+At first, try to identify as many taks as possible. Much easier to start with too many tasks and merge them later on than split few tasks;
+In some case, each task corresponds to a distincet function call.   Define a taks for each function call leads to functional decomposition.
+

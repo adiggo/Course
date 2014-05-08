@@ -1,0 +1,47 @@
+reduction kernel: _syncthreads() ------> each block depends on the next
+Profiling: instuction/branch 
+Memory access---> reading dta form device memory
+two read and write to device memory
+
+use shared memory to reduce memory loads---> memory in device that can be managed by kernel
+kernel has a local cp of data in local device
+
+one read and write in a block
+
+use of modulo:
+if (tid % (2*j))-----> branching and modulo
+change to strided indexing, brancing in inner loop
+if (k < blockDim.x)  -----> int k = 2*j*tid
+    Branches lead to divergence
+
+Bank conflict:
+multiple access to same bank---> need to be serilized
+32 bit ---> 16 and 16---> 16 can use 16 memory in CUDA---> they run in different time
+change to sequential addressing
+----> resolve bank conflic
+
+how many threads: blockDim.x
+
+when tid <= 32
+only warp working
+
+To achieve high memory bandwidth for concurrent accesses, shared memory is divided into equally sized memory modules, called banks that can be accessed simultaneously
+
+5 step to optimize:
+1, using shared memory
+2. reducing thread divergence, remove modulo
+3. reduce bank conflict
+4. maximizing thread utilization
+5. maximizing arithmetic density
+
+In the CUDA programming model, all the threads within a warp run in parallel. But the actual execution in hardware may not be parallel because the number of cores within a SM (Stream Multiprocessor) can be less than 32. For example, GT200 architecture have 8 cores per SM, and the threads within a warp would need 4 clock cycles to finish the execution.
+
+bank conflict is one of many reason slow down GPU kernel.
+
+warp size is the number of threads running concurrently on an MP. each MP contain 8 SP, fastest instruction takes 4 cycle. so 8*4 =32 instructions being executed concurrently. 
+threads all have sequential indices so there is a warp within indices 0 to 31, next with indices 32...63, and until to the total number of threads in a block.
+
+
+
+
+

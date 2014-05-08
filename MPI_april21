@@ -1,0 +1,3 @@
+MPI : message passing interface
+Model: SPMD (single program, multiple data)----> subcatogery of MIMD
+Multi-language support

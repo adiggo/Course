@@ -1,0 +1,3 @@
+why the i, r variable need to be declared before for loop;
+int i
+for (i = 0; **)

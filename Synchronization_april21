@@ -1,0 +1,15 @@
+common goals:
+1. how to resolve conficts result from mutiple processes trying to access shared resources?
+2. an action in one process my enable another action by another process, how to coordinate
+
+Milk algorithms:
+linear algorithms won't work. 
+Using notes. If no milk in fridge, leave a note. When finished, remove note. So first check note
+
+Question on the milk algorithms? 
+
+Mutual exclusion: refers to the requirement of ensuring no two concurrent processes are in their critical section at the same time.
+
+Ideal property------> safety:FIFO--->all operations execute serially   Liveness----->Non-blocking
+
+

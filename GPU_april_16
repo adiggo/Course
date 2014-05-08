@@ -1,0 +1,30 @@
+application -> command (CPU/HOST)->Geometry ->rasterization -> texture-> fragment -> display (Graphics hardware)
+
+vertext unit -> rasteriaztion(converting verctor image to pixel) -> fragment unit -> display
+
+compute unified device architecture (cuda)
+copy from CPU to GPU in CUDA version before 6
+1. hardware architecture, 2. api to access GPU 3. set of tools writing GPU programs
+arbitraty access to memory (scatter, gather)
+fundamental unit is the CUDA processor
+2 different from CPU: cuda processor has local register and local memory. Global memory, constant memory, and texture memory is accessed globally.
+constant memory and texture memory is only can read
+constant memory: read-only memory. shared by all multi-processors. Optimized when wrap of threads read same location otherwise serilized. It is very slow when cache miss. Constant memory is faster to read than global memory if they all read the same address.
+
+texture memory : a large block shared by read-only memory
+reads from texture memory is can be sampling.
+optimized for 2D spatial locality.(refer to use of data elements within relatively close storage locations).
+
+Not keep coherent with global memory in the same kernal call.
+slow to access when cache is missing
+
+In certain addressing situations, reading device memory through texture is faster than global and constant memory.
+
+GPU has lical memories, small cache--- GPU shared memory can be considered as a cache. It is not automatic
+CPU has not local memories, large cache
+threads to stream processing ratio >1
+parallel protion of an application are execute on the device as a kernal
+
+warps are a group of 32 threads
+
+

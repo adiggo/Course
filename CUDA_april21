@@ -1,0 +1,50 @@
+Global memory slow
+Constant memory slow
+Texture memory: read only 
+Cache small
+Application cached memory : shared memory----> physically local to processor
+Device memory:constant memory, texture memory
+Shared memory makes CUDA faster. 
+
+CUDA thread: very light-weight
+in cuda, you can create as much threads as possible to speed up. since its startup cost is veryvery low
+break data into grid (block)
+a threda block may have up to 512 threads
+
+warps are the unit of cuda
+------don't need to synchronization within a warp
+cuda contains a mix of host and device
+host program : run on cpu----configure, run on device, get results back
+device program: run on device-----no printf(no terminal), no fread
+most math fucntions have device equivalent
+
+function:
+_syncThreads: synchronization can only happen thread block alone>>
+No stack in cuda, very limited memory
+the different warps all get the same instruction before proceeding
+no fucntion recursion, since the memory limit
+a large number of registers to store. no dynamic register assign. 
+CUDA support some feature of C++: template
+
+add two vectors in CUDA:
+w = u+v
+how to parallel in CUDA----> take a data element, take a thread, each element takes a thread. Create as many threads as possbile
+N threads created. 
+
+Block: group adjacent elements into block
+
+Grid: the entire vector-----
+
+Device code: per thread run on the program
+what thread id it is.
+Declsprec's--> declaration specifier---- _device_ _host _global
+Function without any CUDA declsprc are host by default
+
+Bridge-----> device and host---> global
+host code:
+allocate GPU memory----> create device pointer, cudaMalloc(host code)---, cudaMemcpy(from host to cuda)
+
+overhead is one concern for GPU computation. Need data from CPU. memory copy (gover by pci bus)
+
+
+

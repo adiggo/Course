@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\title{Assignment 2 Solutions}
+\author{Xiaoping Li}
+\begin{document}
+\maketitle
+
+\section{For reasonable parameters and for however many cores you have on the system, measure the scaleup and speedup of this program.}
+\subsection*{a. Produce charts and interpret/describe the results. Is the speedup linear?}
+Speedup is not linear according to the charts.From chart, we can see running time is decreasing when there are more threads. However, when thread is more than 8, the running time is not dropping any more. 
+\subsection*{b. Why do you think that your scaleup/speedup are less than linear? What are the causes for the loss of parallel efficiency?}
+
+
+For speed up, when thread over 8, the running time is not dropping linearly.
+\\
+
+For scaleup, when threads over 8, hyperthread occurs because our instance is 8 virtual CPUs.
+\\
+
+The major factor causing the efficiency low is because of overhead in multiple thread. With more threads, more overhead need to be initilized. In this example, to avoid sharing data, for each thread we need to create a SealedDES object which takes time. Thus the speedup is not linear when thread over 8. The same with scaleup.
+
+\subsection*{c. Extrapolating from your scaleup analysis, how long would it take to brute force a 56 bit DES key on a machine with 64 cores? Explain your answer.}
+
+
+\begin{center}
+\includegraphics[scale=.50]{serialCompare.png}
+\end{center}
+\subsection*{1.2}
+The normalized figure is listed below. From the figure, we can directly see that with increasing of the filter length, the operation is more utilized. Also, data first loop has higher operation per second compared with filter first loop.
+\begin{center}
+\includegraphics[scale=.55]{dsada.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=.55]{relativePerformace.png}
+\end{center}
+
+\section{Design and run an experiment that measures the startup costs of this code.}
+\subsection*{a. Describe your experiment. Why does it measure startup?}
+
+Speed up plot is shown below. I have generated two difference speed up with data first loop and filter first loop. 
+\begin{center}
+\includegraphics[scale=.55]{speedupData.png}
+\end{center}
+\begin{center}
+\includegraphics[scale=.55]{speedupFilter.png}
+\end{center}
+\subsubsection*{b. Estimate startup cost. Justify your answer.}
+
+\subsubsection*{c. Assuming that the startup costs are the serial portion of the code and the remaining time is the parallel portion of the code, what speedup would you expect to realize on 100 threads? 500 threads? 1000 threads? (Use Amdahl's law.)}
+
+
+
+\begin{center}
+\includegraphics[scale=.5]{scaleup.png}
+\end{center}
+\subsubsection*{2.4}
+From the figure, we can see that it does not keep constant. It remains constant until thread become 8. I am running the simulation on AWS c3.2xlarge with 8 CPUS. So it is its limit on running 8 thread for the better performance.
+\subsection*{Parallel Performance.}
+\subsubsection*{3.1}
+Data first parallel code is faster than the filter first parallel code since the former one has a better utilization of the sharing cache which is similar to the serial situation. 	However, the time difference is not that obvious as serial since running time is spreading over threads when parallel. 
+\subsubsection*{3.2}
+Amdahl's law, if the parallel portion of code is p, number of threads is s, then 
+transform the formula, we can get the linear regression:
+\[
+ \frac{1}{n} -1 =  (\frac{1}{s}-1)p
+\]
+ Put data in Matlab, after calculation the estimation of p is 0.8451 and 0.8512 correspond to data first and filter first.
+
+
+\end{document}

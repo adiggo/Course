@@ -1,0 +1,62 @@
+architecture, memory model -----> speedup 4 tp 16
+shared memory,warps-----> makes good architecture
+
+Reduction:
+Vector and vector inner product
+data size reduced
+reduction can be performed in parallel via a tree-like structure;
+pairs of data can be reduced independently;
+each level is independent with each other
+reduction require sync
+it cannot of pair cannot execute until its ancestors
+_syncthreads() only each multiprocessor
+
+make multiple kernel invocations
+block reduction
+seperate two warps: synthreads() global barrier for all warps
+
+after that finish, invoke anthoer kernal to continue reduction
+
+It is possible use cuda atomics to reduction
+
+branching is bad for SIMD. 
+
+sin, cos, exp 
+floating divide  = 36 
+Integer divide and modulo are very slow
+
+Memory access slow
+
+thread synchronization fast
+
+execute a kernel----> block size(how many threads), grid size(how many block);
+a BLOCK IN ONE MUltiprocessor
+
+memory is arranged in banks    -----> increase memory bw in parallel
+
+when threads try to access same bank, confict--> resolved by serializing memory access
+n-way bank conflict means that there are n threads accessing the same bank----> resolved by issuing serial request
+
+shared memory request for a warp is perform as two:  one for each half warp in one cycle
+if only reads, multiple threads can access the bank wihtout conflict
+
+Registers are zero clock cycle access
+
+
+
+Global memory----slow access, no cached
+has hiding latency with parallelism, rather than cache
+memory access has high letency
+
+aligned , sequential 
+
+
+
+maximize performance:
+
+maximize hardware utilization
+avoid expensive instruction
+avoid shared memory bank conflicts
+coalesce global memory access---> sequential and aligned 
+hide memory latency
+

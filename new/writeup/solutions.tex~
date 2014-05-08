@@ -1,0 +1,15 @@
+\documentclass{article}
+
+\title{Assignment 1 Solutions}
+\author{Shaojie Chen}
+\begin{document}
+\maketitle
+
+\section{Loop Efficiency}
+\subsection*{a.}
+
+\subsection*{b.}
+\subsection*{c.}
+It is more efficient to have the data in the outer loop. This is true because of having the data in the outer loop will take advantage of cache sharing. To be specific, if we put data in the outer loop, then in each inner loop, the input\_array[x] is a constant and only requires one load for all the inner loops. But if we put filter in the outerloop, input\_array[x] is updated for each inner loop, while filter\_list[y] keeps constant. Since the data vector is longer than the filter vector, there are more savings by putting the data in the outer loop.
+\subsection*{d.}
+\end{document}

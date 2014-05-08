@@ -1,0 +1,46 @@
+hadoop mapreduce is a framework for easily writing applications which process vast amount of data in parallel on large clusters.
+---> fault tolerant manner based on its duplication
+
+mapreduce job usually splits the input data into independent chunks which are processoed by the map tasks in a completely parallel manner
+so these job need to be splited in independent. The framework sots the output of maps, the----> reducer
+
+both input and output are stored in a file system. 
+Framework takes care of scheduling tasks, monitoring them and re-execute failed tasks.
+
+Map-reduce framework and hadoop distributed file system are running on the same set of nodes.---> this greatly enhance the performance, since it 
+allows framework effectively schedule tasks on the nodes where data is already present---> result in very high aggregate bandwidth across the cluster.
+
+mapreduce framework contains a single master JobTracker and one slave TaskTracker per cluster node.
+master is reponsible for scheduling the job's component tasks on the slaves, monitoring them and re-executing the failed tasks.
+
+----> application specify the input and output locations and supply map and reducer function via implementing or extended class/interface
+
+Hadoop streaming is a utility allows users to create and run jobs with any executable as the mapper and reducer.
+
+Hadoop use all of the machines in the cluster and computes output results as efficiently as possible.
+----> Power of parallel
+
+For a single machine environment, failure is not something that program designer explocitly worry about very often---> no way for program recover anyway
+
+in a distributed environment, partial failure are an expected: network congestion-> data not arrive another node on time
+
+Hadoop provides no security model, nor safeguards against malicious inserted data. But it handle hardware failuer and data congestion issues very robustly.
+
+Resources for hadoop to use:
+
+memory--> 
+hard drive--> if one node's hard drive is full, the distributed system may need to route this data to other nodes 
+
+
+Number of transistors that can be placed in a processor will double approximately every two year, for half the cost.
+
+Data distribution in hadoop:
+In addition to several chinks is replicated in several nodes, which guarantee the failure of one node won't turn down the whole program.
+
+Data is conceptually record-oriented.
+
+Which data operated on by a node is chosen based on its locality to the node: most data is read from the local disk straight into the CPU, alleviating strain on network bandwidth and preventing unnecessary network transfers. ----> Moving computation to the data(which means the data is not transferred far)
+
+
+
+
